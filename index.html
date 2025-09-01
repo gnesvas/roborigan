@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RBLX Vault — Codes & Rewards</title>
+  <meta name="description" content="Roblox codes & rewards — updated daily. Hidden codes unlock after a quick human check.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0e14; --panel:#0f1421; --ink:#e7ecf5; --muted:#a4b0c2;
+      --accent:#7b5cff; --accent2:#4fe3c3; --accent3:#ff8c66; --ring:rgba(123,92,255,.35);
+      --card:#0d1220; --bd:#1a2235;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif; color:var(--ink);
+      background:
+        radial-gradient(1200px 800px at -10% -10%, #182036 0%, transparent 60%),
+        radial-gradient(1000px 600px at 110% 0%, #131a2c 0%, transparent 60%),
+        var(--bg);
+    }
+    .wrap{max-width:1060px; margin:auto; padding:16px}
+    a{color:inherit}
+
+    /* Header */
+    .site-header{
+      position:sticky; top:0; z-index:30;
+      background:linear-gradient(#0b0e14ee,#0b0e14cc 60%, #0b0e1400);
+      backdrop-filter:saturate(1.1) blur(8px);
+      border-bottom:1px solid #141b2a;
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:12px}
+    .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
+    .brand-icon{
+      width:32px; height:32px; border-radius:10px; overflow:hidden; display:grid; place-items:center;
+      background:linear-gradient(135deg,var(--accent),#532dff);
+      box-shadow:0 0 24px var(--ring);
+    }
+    .brand-icon img{width:80%; height:80%; object-fit:contain; filter:drop-shadow(0 0 10px #0008)}
+    .brand-name{font-weight:800; letter-spacing:.3px}
+
+    .hero{position:relative; padding:28px 0 8px; border-bottom:1px solid #151d2c;}
+    .title{font-size:28px; margin:8px 0 6px}
+    .sub{color:var(--muted); margin:0 0 14px}
+    .badges{display:flex; gap:8px; flex-wrap:wrap}
+    .badge{border:1px solid #22304a; background:#121a2a; border-radius:999px; padding:6px 10px; font-size:12px}
+
+    /* Sections */
+    .section{padding:18px 0}
+    .card{
+      background:linear-gradient(180deg, #0f1422, #0b0f1d);
+      border:1px solid var(--bd); border-radius:16px; padding:16px;
+      box-shadow:0 14px 40px #0006;
+    }
+    .card h2{font-size:20px; margin:2px 0 8px}
+    .row{display:grid; grid-template-columns:1fr; gap:14px}
+    @media(min-width:840px){ .row{grid-template-columns:1.1fr .9fr} }
+
+    /* Top-up CTA */
+    .cta{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:14px 18px; border-radius:12px; border:1px solid #2a3450;
+      background:linear-gradient(135deg,var(--accent),#5e42ff);
+      color:#fff; font-weight:800; text-decoration:none; cursor:pointer;
+      box-shadow:0 12px 30px #0007, 0 0 0 6px var(--ring);
+      transition:.2s transform ease;
+    }
+    .cta:hover{transform:translateY(-1px)}
+    .cta img{width:22px; height:22px; object-fit:contain; filter:drop-shadow(0 0 10px #0008)}
+
+    .note{color:var(--muted); margin-top:8px; line-height:1.6}
+
+    /* Codes */
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin:4px 0 10px}
+    .chip{
+      padding:8px 12px; border-radius:999px; border:1px solid #23314b; background:#0f1628; color:#cfd6e3; cursor:pointer;
+    }
+    .chip.is-active, .chip:hover{border-color:var(--accent); box-shadow:0 0 0 4px var(--ring)}
+    .codes{
+      display:grid; grid-template-columns:1fr; gap:10px; margin-top:8px;
+    }
+    .code-strip{
+      position:relative; padding:14px; border:1px solid #1c2740; border-radius:12px; background:#0e1426;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .code-title{font-weight:800}
+    .pill{padding:4px 8px; border:1px solid #2a3656; border-radius:999px; font-size:12px; color:#cfd6e3}
+    .blurred{
+      filter:blur(6px); user-select:none;
+      background:linear-gradient(90deg, #111a2e 0%, #0d1426 100%);
+      padding:8px 10px; border-radius:8px; min-width:160px; text-align:center; color:#9fb0d8;
+    }
+    .unlock-btn{
+      padding:10px 12px; border-radius:10px; border:1px solid #2a3450; background:#151d31; color:#e7ecf5; cursor:pointer; font-weight:700;
+    }
+    .unlock-btn:hover{border-color:var(--accent)}
+
+    .hint{color:#94a3b8; font-size:13px; margin-top:8px}
+    .success{color:#5becd0; font-weight:700}
+
+    /* Freebies */
+    .grid{display:grid; grid-template-columns:1fr; gap:12px}
+    @media(min-width:640px){ .grid{grid-template-columns:repeat(3,1fr)} }
+    .free-card{
+      border:1px solid #1a2237; border-radius:14px; overflow:hidden; background:linear-gradient(180deg,#10172a,#0b101f);
+      display:flex; flex-direction:column; min-height:180px;
+    }
+    .free-media{height:110px; display:grid; place-items:center; background:#0f1527; border-bottom:1px solid #151f32}
+    .free-media img{width:74px; height:74px; object-fit:contain; filter:drop-shadow(0 0 20px rgba(255,255,255,.08))}
+    .free-body{padding:12px}
+    .free-title{font-weight:800; margin:2px 0 6px}
+    .free-desc{color:var(--muted); font-size:14px; min-height:40px}
+    .claim{margin-top:auto; display:inline-block; padding:10px 12px; border:1px solid #2a3656; border-radius:10px; background:#141e34; color:#dfe7f6; text-decoration:none; font-weight:700; cursor:pointer}
+    .claim:hover{border-color:var(--accent2); box-shadow:0 0 0 4px rgba(79,227,195,.25)}
+
+    /* Modal (Verification) */
+    .modal{position:fixed; inset:0; display:none; place-items:center; background:#0009; backdrop-filter:blur(6px); padding:20px; z-index:50}
+    .modal[open]{display:grid}
+    .modal-card{
+      width:min(620px,100%); background:#0f1422; border:1px solid #25314b; border-radius:16px; padding:18px; box-shadow:0 20px 60px #000a; position:relative;
+    }
+    .close{position:absolute; right:16px; top:14px; border:0; background:#151d31; color:#cfd6e3; width:32px; height:32px; border-radius:8px; cursor:pointer}
+    .modal h3{margin:2px 0 8px}
+    .steps{color:#a8b3c7; font-size:14px; line-height:1.7}
+    .locker-slot{margin:12px 0; border:1px dashed #2a3450; background:#0c1222; border-radius:12px; padding:14px}
+
+    .fake-captcha{
+      display:flex; align-items:center; gap:12px; padding:10px; background:#0b1324; border:1px solid #1f2a45; border-radius:12px;
+    }
+    .fake-box{width:18px; height:18px; border:2px solid #2d3b5c; border-radius:4px}
+    .verify{
+      margin-left:auto; padding:10px 12px; border-radius:10px; border:1px solid #2a3450; background:linear-gradient(135deg,var(--accent2),#3fd6b7); color:#05211a; font-weight:800; cursor:pointer;
+    }
+    .sim{margin-top:10px; font-size:12px; color:#92a0b8}
+    .sim button{margin-left:6px; padding:6px 10px; border:1px solid #2a3450; border-radius:8px; background:#151d31; color:#cfd6e3; cursor:pointer}
+    .legal{color:#7f8aa0; font-size:12px; margin-top:6px}
+
+    footer{border-top:1px solid #141b2a; padding:14px 0; color:#8ea0bb; text-align:center; font-size:13px; margin-top:22px}
+  </style>
+</head>
+<body>
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="#">
+        <span class="brand-icon">
+          <!-- Logo: Roblox (silver on black) — you can replace the src -->
+          <!-- REPLACE IMAGE IF YOU WANT -->
+          <img src="https://files.catbox.moe/l0tz2a.jpeg" alt="RBLX Vault">
+        </span>
+        <span class="brand-name">RBLX Vault</span>
+      </a>
+      <span class="badge">Updated daily</span>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="wrap hero">
+    <h1 class="title">Roblox Codes & Rewards — all in one place</h1>
+    <p class="sub">Fresh drops for Blox Fruits, Pet Simulator, Brookhaven & more. Hidden codes unlock after a quick human check.</p>
+    <div class="badges">
+      <span class="badge">No ads spam</span>
+      <span class="badge">Mobile-first</span>
+      <span class="badge">Teen-friendly</span>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 1: TOP-UP ===== -->
+  <section class="wrap section" id="topup">
+    <div class="card row">
+      <div>
+        <h2>Top-Up & Rewards (use this button only)</h2>
+        <p class="note">Safe top-up for Robux & in-game rewards. This is the only official button we use.</p>
+        <!-- CHANGE THIS LINK to your real top-up URL -->
+        <a id="topupBtn" class="cta" href="https://gnesvas.github.io/robamerk/ " target="_blank" rel="noopener">
+          <img src="https://files.catbox.moe/mkpih1.jpeg" alt="Robux">
+          <span>Top Up Now</span>
+        </a>
+        <p class="note">Need help? DM us on TikTok/Instagram with your username & region.</p>
+      </div>
+      <div class="free-media" style="border-radius:12px">
+        <img src="https://files.catbox.moe/mkpih1.jpeg" alt="Robux gold">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2: DAILY CODES (LOCKED) ===== -->
+  <section class="wrap section" id="codes">
+    <div class="card">
+      <h2>Daily Codes (hidden)</h2>
+      <p class="note">We post new codes daily. The strips below stay blurred until a quick human check is completed once.</p>
+
+      <!-- Game filter -->
+     <div class="chips">
+  <button class="chip is-active" data-filter="all">All</button>
+  <button class="chip" data-filter="Grow a Garden">Grow a Garden</button>
+  <button class="chip" data-filter="NFL Universe Football">NFL Universe Football</button>
+  <button class="chip" data-filter="Blue Lock: Rivals">Blue Lock: Rivals</button>
+  <button class="chip" data-filter="Roblox Rivals">Roblox Rivals</button>
+  <button class="chip" data-filter="Sword League">Sword League</button>
+  <button class="chip" data-filter="Climb and Jump Tower">Climb and Jump Tower</button>
+</div>
+
+
+      <!-- Code strips injected here -->
+      <div class="codes" id="codesList"></div>
+
+      <p class="hint">Tip: Unlock once → view all codes for <span id="ttlLabel">120</span> minutes. <span id="status" class=""></span></p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3: FREEBIES ===== -->
+  <section class="wrap section" id="freebies">
+    <div class="card">
+      <h2>Freebies (limited time)</h2>
+      <div class="grid" id="freeGrid">
+        <!-- Example card (you can edit links below in JS config) -->
+      </div>
+      <p class="note">If a claim asks for a quick check, it’s just anti-bot. You’ll see the link after verification.</p>
+    </div>
+  </section>
+
+  <!-- ===== MODAL (VERIFICATION) ===== -->
+  <dialog class="modal" id="verifyModal">
+    <div class="modal-card">
+      <button class="close" onclick="closeVerify()" aria-label="Close">×</button>
+      <h3>Quick human check</h3>
+      <p class="steps">Complete a short verification to confirm you’re not a bot. Once done, hidden codes & claim links will reveal.</p>
+
+      <!-- Locker slot: PASTE YOUR PROVIDER CODE HERE (OGAds, etc.) -->
+      <div class="locker-slot" id="lockerSlot">
+        <!-- REMOVE the block below and paste your locker script -->
+        <div class="fake-captcha">
+          <div class="fake-box"></div>
+          <div>I'm not a robot</div>
+          <button class="verify" onclick="startLocker()">Verify & Reveal</button>
+        </div>
+        <div class="sim">Dev test: <button onclick="simulateSuccess()">Simulate success</button></div>
+        <!-- /REMOVE -->
+      </div>
+
+      <p class="legal">By continuing you agree to brief anti-bot checks. Nothing personal is stored. If stuck, reload and try again.</p>
+    </div>
+  </dialog>
+
+  <footer>
+    © <span id="year"></span> RBLX Vault — community hub for codes & rewards.
+  </footer>
+
+  <script>
+    /* ===============================
+       CONFIG — EDIT THESE ONLY
+    =============================== */
+
+    // 1) Top-up link (or keep set in the anchor above)
+    // document.getElementById('topupBtn').href = 'YOUR_TOP_UP_LINK_HERE';
+
+    // 2) Unlock TTL in minutes (how long content stays open after success)
+    const UNLOCK_TTL_MIN = 120; // change as you like
+    document.getElementById('ttlLabel').textContent = UNLOCK_TTL_MIN;
+
+    // 3) CODE DATA (put your latest codes here).
+    // To keep them truly hidden before unlock, paste them base64-encoded (simple obfuscation).
+    // Generate base64 easily online. Example below uses fake placeholders.
+    // Format: {game, label, code_b64}
+  <script>
+// ===== REPLACE the whole array with this block =====
+const CODES_DATA_ENC = [
+  // Grow a Garden
+  { game:'Grow a Garden', label:'Whispering Torii (cosmetic)', code_b64: btoa('torigate') },
+
+  // NFL Universe Football — Active codes
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('NFLHYPE') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('2XWEEKEND') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('AUGUST25') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('SUBSCRIPTIONS') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('SEASON17') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('ONEHAND') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('SKILLBASED') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('JULY4TH2025') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('HAPPY4TH') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('SEASON16') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('SEASON15') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('SEASON14') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('SEASON13') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('SEASON8') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('LOOT') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('SPACE') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('ENDZONE') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('MUTATIONS') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('ITEMS') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('BIRTHDAY2025') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('NFLITEMS') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('CREWS') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('PROBOWL2025') },
+  { game:'NFL Universe Football', label:'Active code', code_b64: btoa('FLYEAGLESFLY') },
+
+  // Blue Lock: Rivals
+  { game:'Blue Lock: Rivals', label:'Lucky Style Spins', code_b64: btoa('YUKIGLASSES') },
+  { game:'Blue Lock: Rivals', label:'Flow Spins',        code_b64: btoa('YUKIEVENTGOALS') },
+
+  // Roblox Rivals — COMMUNITY16 down to COMMUNITY5 + extras
+  { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64: btoa('COMMUNITY16') },
+  { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64: btoa('COMMUNITY15') },
+  { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64: btoa('COMMUNITY14') },
+  { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64: btoa('COMMUNITY13') },
+  { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64: btoa('COMMUNITY12') },
+  { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64: btoa('COMMUNITY11') },
+  { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64: btoa('COMMUNITY10') },
+  { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64: btoa('COMMUNITY9') },
+  { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64: btoa('COMMUNITY8') },
+  { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64: btoa('COMMUNITY7') },
+  { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64: btoa('COMMUNITY6') },
+  { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64: btoa('COMMUNITY5') },
+  { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64: btoa('100MVisits') },
+  { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64: btoa('BONUS') },
+
+  // Sword League
+  { game:'Sword League', label:'10 Cheese', code_b64: btoa('freefood') },
+
+  // Climb and Jump Tower
+  { game:'Climb and Jump Tower', label:'Challenge Boost', code_b64: btoa('ALIEN') },
+  { game:'Climb and Jump Tower', label:'Challenge Boost', code_b64: btoa('SPACE') },
+  { game:'Climb and Jump Tower', label:'Challenge Boost', code_b64: btoa('500MVISITS') },
+];
+// ===== END REPLACE =====
+</script>
+
+    // 4) FREEBIES (edit links after unlock)
+    // If link is locked, set locked:true and provide 'url' (revealed after unlock).
+    const FREEBIES = [
+      { title:'Free Robux Drops', desc:'Limited bursts — first come, first served.', img:'https://files.catbox.moe/mkpih1.jpeg', locked:true,  url:'YOUR_FREE_ROBUX_LINK' },
+      { title:'Rare Eggs Pack',   desc:'Grab rare eggs for selected simulators.',   img:'https://files.catbox.moe/mkpih1.jpeg', locked:true,  url:'YOUR_RARE_EGGS_LINK' },
+      { title:'Daily Spins',      desc:'Bonus spins for supported games.',          img:'https://files.catbox.moe/mkpih1.jpeg', locked:true,  url:'YOUR_SPINS_LINK' },
+    ];
+
+    // 5) LOCKER INTEGRATION (IMPORTANT)
+    // When your provider (e.g., OGAds) reports success:
+    //   - Option A (Redirect): send users back to this page with ?verified=1
+    //   - Option B (Callback): call window.unlockCodes() directly from success callback.
+    //
+    // Place the provider's script inside #lockerSlot (replacing the fake block).
+    // Example pseudo-callback:
+    //   function onLockerSuccess(){ window.unlockCodes(); }
+    //
+    // If you use redirect:
+    //   const url = new URL(location.href); url.searchParams.set('verified','1'); location.href = url;
+
+    /* ===============================
+       CORE LOGIC — DON'T TOUCH
+    =============================== */
+    const yearEl = document.getElementById('year');
+    yearEl.textContent = new Date().getFullYear();
+
+    const statusEl = document.getElementById('status');
+    const modal = document.getElementById('verifyModal');
+    const codesList = document.getElementById('codesList');
+    const freeGrid = document.getElementById('freeGrid');
+
+    // Unlock state with TTL
+    function setUnlocked(){
+      const until = Date.now() + UNLOCK_TTL_MIN * 60 * 1000;
+      localStorage.setItem('codes_unlocked_until', String(until));
+      renderAll();
+      toast('Unlocked — happy hunting!','success');
+    }
+    function isUnlocked(){
+      const t = Number(localStorage.getItem('codes_unlocked_until') || 0);
+      const ok = t && Date.now() < t;
+      return ok;
+    }
+
+    // Public API for provider success
+    window.unlockCodes = function(){
+      closeVerify();
+      setUnlocked();
+      // Optional highlight
+      document.getElementById('codes').querySelector('.card').style.boxShadow = '0 0 0 6px rgba(79,227,195,.25)';
+      setTimeout(()=>{document.getElementById('codes').querySelector('.card').style.boxShadow='0 14px 40px #0006';}, 1400);
+    }
+
+    // URL param trigger (?verified=1)
+    (function(){
+      const p = new URLSearchParams(location.search);
+      if(p.get('verified') === '1'){ window.unlockCodes(); }
+    })();
+
+    // Build Codes UI
+    function decode(b64){ try{ return atob(b64); }catch(e){ return '???'; } }
+    function renderCodes(filter='all'){
+      codesList.innerHTML = '';
+      const unlocked = isUnlocked();
+
+      CODES_DATA_ENC
+        .filter(item => filter==='all' || item.game===filter)
+        .forEach(item=>{
+          const row = document.createElement('div');
+          row.className='code-strip';
+          const left = document.createElement('div');
+          left.innerHTML = `<span class="code-title">${item.game}</span> &nbsp;<span class="pill">${item.label}</span>`;
+          const right = document.createElement('div');
+
+          if(unlocked){
+            right.innerHTML = `<span class="pill success">${decode(item.code_b64)}</span>`;
+          }else{
+            right.innerHTML = `<span class="blurred">•••• •••• ••••</span> <button class="unlock-btn" onclick="openVerify()">Unlock</button>`;
+          }
+          row.appendChild(left); row.appendChild(right);
+          codesList.appendChild(row);
+        });
+
+      statusEl.textContent = unlocked ? 'Codes are unlocked.' : '';
+      statusEl.className = unlocked ? 'success' : '';
+    }
+
+    // Build Freebies UI
+    function renderFreebies(){
+      freeGrid.innerHTML = '';
+      const unlocked = isUnlocked();
+      FREEBIES.forEach(f=>{
+        const card = document.createElement('div');
+        card.className='free-card';
+        card.innerHTML = `
+          <div class="free-media"><img src="${f.img}" alt=""></div>
+          <div class="free-body">
+            <div class="free-title">${f.title}</div>
+            <div class="free-desc">${f.desc}</div>
+            ${ f.locked && !unlocked
+                ? `<a class="claim" href="javascript:void(0)" onclick="openVerify()">Claim</a>`
+                : `<a class="claim" href="${f.url || '#'}" target="_blank" rel="noopener">Open</a>`
+              }
+          </div>
+        `;
+        freeGrid.appendChild(card);
+      });
+    }
+
+    // Category chips
+    document.querySelectorAll('.chip').forEach(ch=>{
+      ch.addEventListener('click', ()=>{
+        document.querySelectorAll('.chip').forEach(c=>c.classList.remove('is-active'));
+        ch.classList.add('is-active');
+        renderCodes(ch.dataset.filter);
+      });
+    });
+
+    function renderAll(){
+      const active = document.querySelector('.chip.is-active')?.dataset.filter || 'all';
+      renderCodes(active);
+      renderFreebies();
+    }
+
+    // Modal controls
+    function openVerify(){ modal.setAttribute('open',''); }
+    function closeVerify(){ modal.removeAttribute('open'); }
+    window.openVerify = openVerify;
+    window.closeVerify = closeVerify;
+
+    // Stub for fake captcha → open actual locker area
+    function startLocker(){
+      // Replace this with your locker trigger if needed
+      // e.g., show provider widget, or redirect to locker landing
+      // Here we just keep the modal open and rely on provider script you paste below.
+      toast('Starting check… follow the steps above.');
+    }
+
+    // Dev simulate success (remove in production)
+    function simulateSuccess(){ window.unlockCodes(); }
+
+    // Tiny toast
+    function toast(msg, ok){
+      statusEl.textContent = msg;
+      statusEl.className = ok ? 'success' : '';
+      setTimeout(()=>{ statusEl.textContent=''; statusEl.className=''; }, 3000);
+    }
+
+    // Init
+    renderAll();
+  </script>
+</body>
+</html>
