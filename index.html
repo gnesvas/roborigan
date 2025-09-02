@@ -3,109 +3,200 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>RBLX Vault — Codes & Rewards</title>
-  <meta name="description" content="Roblox codes & rewards — updated daily. Hidden codes unlock after a quick human check.">
+  <title>RBLX Vault — Codes & Top-Up</title>
+  <meta name="description" content="Roblox codes — sealed on-site. Use our verification gateway to access updates." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg:#07090d; --panel:#0b0f19; --ink:#f1f5ff; --muted:#9fb0c8;
-      --gold:#ffd54a; --cyan:#34e9ff; --ring:rgba(52,233,255,.25);
-      --bd:#142036; --card:#0c1222;
+      /* Lux palette on white space background */
+      --paper:#ffffff;            /* base white */
+      --ink:#0b1020;              /* primary text (deep navy) */
+      --muted:#5d6b88;            /* secondary text */
+      --line:#e6ecf5;             /* borders */
+      --panel:#ffffff;            /* cards */
+      --shadow:0 10px 30px rgba(10,20,50,.08), 0 2px 10px rgba(10,20,50,.05);
+
+      /* Brand accents (refined) */
+      --violet:#6a5cff;           /* royal violet */
+      --cyan:#00d1ff;             /* electric cyan */
+      --gold:#ffbf2f;             /* robux gold */
+      --chip:#edf3ff;             /* soft pill bg */
+      --chip-bd:#c8d6ff;          /* soft pill border */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif; color:var(--ink);
-      background:
-        radial-gradient(1200px 800px at -10% -10%, #121a2d 0%, transparent 60%),
-        radial-gradient(1000px 600px at 110% 0%, #0f1728 0%, transparent 60%),
-        var(--bg);
+      background: radial-gradient(1400px 900px at 10% -10%, #f2f6ff 0%, transparent 60%),
+                  radial-gradient(1200px 800px at 120% -10%, #eef3ff 0%, transparent 60%),
+                  var(--paper);
+      overflow-x:hidden;
     }
     a{color:inherit; text-decoration:none}
     .wrap{max-width:1060px; margin:auto; padding:16px}
 
-    /* Header */
-    .site-header{position:sticky;top:0;z-index:40;background:linear-gradient(#07090de6,#07090dcc 60%,#07090d00);backdrop-filter:saturate(1.1) blur(10px);border-bottom:1px solid #0d1424}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;align-items:center;gap:10px}
-    .brand-icon{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,#1b2338,#0f1728);border:1px solid #1a2540;box-shadow:0 0 24px #0008}
-    .brand-icon img{width:78%;height:78%;object-fit:contain;filter:drop-shadow(0 0 10px #0008)}
-    .brand-name{font-weight:800;letter-spacing:.3px}
-    .badge{border:1px solid #1c2947;background:#0f1728;border-radius:999px;padding:6px 10px;font-size:12px;color:#cfe6ff}
+    /* ===== Background canvas (stars + atomic 3D lines) ===== */
+    #bgCanvas{position:fixed; inset:0; z-index:-1;}
 
-    /* Hero */
-    .hero{padding:24px 0 8px;border-bottom:1px solid #0f1a30}
-    .title{font-size:28px;margin:8px 0 6px}
-    .sub{color:var(--muted);margin:0 0 14px}
-
-    /* Cards & layout */
-    .section{padding:18px 0}
-    .card{background:linear-gradient(180deg,#0d1324,#0a0f1f);border:1px solid var(--bd);border-radius:16px;padding:16px;box-shadow:0 14px 40px #0007}
-    .row{display:grid;grid-template-columns:1fr;gap:14px}
-    @media(min-width:840px){.row{grid-template-columns:1.1fr .9fr}}
-
-    /* CTA */
-    .cta{
-      display:inline-flex;align-items:center;gap:10px;padding:14px 18px;border-radius:12px;border:1px solid #213051;
-      background:linear-gradient(135deg,var(--gold),#ffb300);color:#262002;font-weight:900;box-shadow:0 12px 30px #0007,0 0 0 6px rgba(255,213,74,.15);
-      transition:.2s transform ease;
+    /* ===== Header ===== */
+    .site-header{
+      position:sticky; top:0; z-index:20;
+      background:rgba(255,255,255,.7);
+      backdrop-filter:saturate(1.2) blur(10px);
+      border-bottom:1px solid var(--line);
     }
-    .cta:hover{transform:translateY(-1px)}
-    .cta img{width:22px;height:22px;object-fit:contain}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 16px}
+    .brand{display:flex; align-items:center; gap:12px}
+    .brand-icon{
+      width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
+      background:#0f1222;              /* dark frame to embrace Roblox black logo */
+      box-shadow:0 6px 16px rgba(0,0,0,.12), inset 0 0 0 1px #1d244a;
+    }
+    .brand-icon img{width:78%;height:78%;object-fit:contain}
+    .brand-name{font-weight:800;letter-spacing:.2px}
+    .badge{font-size:12px;border:1px solid var(--line);padding:6px 10px;border-radius:999px;background:#f8fbff;color:#2b3456}
 
-    .note{color:var(--muted);margin-top:8px;line-height:1.6}
+    /* ===== Hero ===== */
+    .hero{padding:24px 16px}
+    .title{font-size:30px;margin:6px 0 6px}
+    .sub{color:var(--muted);margin:0}
 
-    /* Chips */
-    .chips{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
-    .chip{padding:8px 12px;border-radius:999px;border:1px solid #1b2948;background:#0b1428;color:#dce9ff;cursor:pointer}
-    .chip.is-active,.chip:hover{border-color:var(--cyan);box-shadow:0 0 0 4px var(--ring)}
+    /* ===== Cards & layout ===== */
+    .section{padding:18px 16px}
+    .card{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:18px; box-shadow:var(--shadow)}
+    .row{display:grid; grid-template-columns:1fr; gap:16px}
+    @media(min-width:860px){ .row{grid-template-columns:1.1fr .9fr} }
 
-    /* Codes */
-    .codes{display:grid;grid-template-columns:1fr;gap:10px;margin-top:8px}
-    .code-strip{position:relative;padding:14px;border:1px solid #182745;border-radius:12px;background:#0b1428;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer}
+    /* ===== Top-up CTA ===== */
+    .cta{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:14px 18px; border-radius:14px; border:1px solid #ffe198;
+      background:linear-gradient(145deg,#ffe598,#ffbf2f);
+      color:#3b2a00; font-weight:900; box-shadow:0 10px 26px rgba(255,191,47,.25);
+      transition:transform .15s ease, filter .15s ease, box-shadow .25s ease, background-position .35s ease;
+      background-size:120% 120%;
+      will-change:transform,filter;
+    }
+    .cta img{
+      width:24px; height:24px; object-fit:contain;
+      background:#fff; border-radius:8px; padding:2px; box-shadow:inset 0 0 0 1px #eee;
+    }
+    .note{color:var(--muted); margin-top:8px; line-height:1.6}
+
+    /* ===== Codes ===== */
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin:8px 0 12px}
+    .chip{
+      padding:8px 12px; border-radius:999px; background:var(--chip); border:1px solid var(--chip-bd); color:#2b3456; cursor:pointer;
+      font-weight:600;
+      transition:transform .15s ease, filter .15s ease, box-shadow .25s ease, background-position .35s ease;
+      background-size:120% 120%;
+      will-change:transform,filter;
+    }
+    .chip.is-active{box-shadow:0 0 0 4px rgba(106,92,255,.18), inset 0 0 0 1px #b6a8ff}
+    .codes{display:grid; grid-template-columns:1fr; gap:10px}
+    .code-strip{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:14px; border:1px solid var(--line); border-radius:12px; background:#fff; box-shadow:var(--shadow);
+    }
     .code-left{font-weight:800}
-    .pill{padding:4px 8px;border:1px solid #24365d;border-radius:999px;font-size:12px;color:#cfe1ff}
-    .blurred{filter:blur(6px);user-select:none;background:linear-gradient(90deg,#0a1326 0%,#0a1122 100%);padding:8px 10px;border-radius:8px;min-width:160px;text-align:center;color:#9fb0d8}
-    .unlock{padding:10px 12px;border-radius:10px;border:1px solid #203257;background:#0c1730;color:#e7f2ff;font-weight:800}
-    .unlock:hover{border-color:var(--cyan)}
-    .hint{color:#9fb0c8;font-size:13px;margin-top:8px}
-    .success{color:#46f2d8;font-weight:800}
+    .pill{padding:4px 8px;border:1px solid #d8e2ff;border-radius:999px;font-size:12px;color:#39446a;background:#f3f7ff}
+    .blurred{
+      filter:blur(6px); user-select:none; background:linear-gradient(90deg,#eef3ff 0%, #f7faff 100%);
+      padding:8px 10px; border-radius:8px; min-width:170px; text-align:center; color:#8aa0d6;
+    }
+    .unlock{
+      padding:10px 14px; border-radius:12px; border:1px solid #a8e8ff;
+      background:linear-gradient(145deg,var(--violet),var(--cyan)); color:#fff; font-weight:900; cursor:pointer;
+      box-shadow:0 10px 26px rgba(0,209,255,.2);
+      transition:transform .15s ease, filter .15s ease, box-shadow .25s ease, background-position .35s ease;
+      background-size:120% 120%;
+      will-change:transform,filter;
+    }
 
-    /* Freebies */
-    .grid{display:grid;grid-template-columns:1fr;gap:12px}
-    @media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
-    .free-card{border:1px solid #16253f;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#0e1730,#0a1020);display:flex;flex-direction:column;min-height:186px}
-    .free-media{height:110px;display:grid;place-items:center;background:#0b1428;border-bottom:1px solid #15233d}
-    .free-media img{width:74px;height:74px;object-fit:contain}
-    .free-body{padding:12px;display:flex;flex-direction:column;gap:8px}
-    .free-title{font-weight:900}
-    .free-desc{color:var(--muted);font-size:14px;min-height:40px}
-    .claim{margin-top:auto;display:inline-block;padding:10px 12px;border:1px solid #203257;border-radius:10px;background:#0c1730;color:#e7f2ff;font-weight:800;text-align:center}
-    .claim:hover{border-color:var(--cyan);box-shadow:0 0 0 4px var(--ring)}
+    /* Robux gold icon on white: framed cleanly */
+    .media-frame{display:grid; place-items:center; height:128px; border-radius:16px; background:#fff; border:1px solid var(--line); box-shadow:var(--shadow)}
+    .media-frame img{width:92px; height:92px; object-fit:contain; background:#fff; border-radius:18px; padding:10px}
 
-    /* Modal */
-    dialog.modal{position:fixed;inset:0;display:none;place-items:center;background:#0009;backdrop-filter:blur(8px);padding:20px;z-index:60}
+    /* ===== Modal ===== */
+    dialog.modal{position:fixed; inset:0; display:none; place-items:center; background:rgba(10,16,34,.35); backdrop-filter:blur(10px); padding:20px; z-index:30}
     dialog[open]{display:grid}
-    .modal-card{width:min(620px,100%);background:#0b1428;border:1px solid #203257;border-radius:16px;padding:18px;box-shadow:0 20px 60px #000a;position:relative}
-    .close{position:absolute;right:16px;top:14px;border:0;background:#0c1730;color:#dce9ff;width:32px;height:32px;border-radius:8px;cursor:pointer}
+    .modal-card{width:min(620px,100%); background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px; box-shadow:var(--shadow); position:relative}
+    .close{
+      position:absolute; right:16px; top:14px; border:0; background:#f3f6ff; color:#1f2a46; width:32px; height:32px; border-radius:8px; cursor:pointer; box-shadow:var(--shadow);
+      transition:transform .15s ease, filter .15s ease, box-shadow .25s ease;
+      will-change:transform,filter;
+    }
     .modal h3{margin:2px 0 8px}
-    .steps{color:#9fb0c8;font-size:14px;line-height:1.7}
-    .locker-slot{margin:12px 0;border:1px dashed #22365d;background:#0a1326;border-radius:12px;padding:14px}
-    .fake{display:flex;align-items:center;gap:12px;padding:10px;background:#0b162c;border:1px solid #1b2d51;border-radius:12px}
-    .fake .box{width:18px;height:18px;border:2px solid #27406e;border-radius:4px}
-    .verify{margin-left:auto;padding:10px 12px;border-radius:10px;border:1px solid #203257;background:linear-gradient(135deg,var(--cyan),#00b7ff);color:#001c26;font-weight:900;cursor:pointer}
+    .steps{color:#485577; font-size:14px; line-height:1.8}
+    .locker-slot{margin:12px 0; border:1px dashed #cfd9f2; background:#fbfdff; border-radius:12px; padding:14px}
+    .verify-cta{
+      display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px; border:1px solid #a8e8ff;
+      background:linear-gradient(145deg,var(--violet),var(--cyan)); color:#fff; font-weight:900;
+      box-shadow:0 10px 28px rgba(106,92,255,.25);
+      transition:transform .15s ease, filter .15s ease, box-shadow .25s ease, background-position .35s ease;
+      background-size:120% 120%;
+      will-change:transform,filter;
+    }
+    .legal{color:#6a789b; font-size:12px; margin-top:6px}
 
-    footer{border-top:1px solid #0d1424;padding:14px 0;color:#95a8c4;text-align:center;font-size:13px;margin-top:22px}
-    .uall{margin-left:10px}
+    footer{border-top:1px solid var(--line); color:#5e6a86; text-align:center; font-size:13px; padding:16px}
+
+    /* ===== Fancy animations for ALL buttons ===== */
+    @keyframes glowPulse{
+      from{ box-shadow:0 10px 22px rgba(0,209,255,.18), 0 0 0 0 rgba(0,209,255,0)}
+      to{   box-shadow:0 16px 36px rgba(0,209,255,.32), 0 0 0 6px rgba(0,209,255,.10)}
+    }
+    @keyframes hueFlow{
+      from{ filter:hue-rotate(0deg) saturate(1) brightness(1) }
+      to{   filter:hue-rotate(14deg) saturate(1.15) brightness(1.06) }
+    }
+    @keyframes shake{
+      0%,100%{ transform:translate3d(0,0,0) rotate(0) }
+      20%{ transform:translate3d(1px,-1px,0) rotate(-0.4deg) }
+      40%{ transform:translate3d(-1px,1px,0) rotate(0.4deg) }
+      60%{ transform:translate3d(1px,0,0) rotate(-0.3deg) }
+      80%{ transform:translate3d(-1px,-1px,0) rotate(0.3deg) }
+    }
+
+    /* Apply to ALL actionable buttons */
+    .cta:hover,
+    .unlock:hover,
+    .verify-cta:hover,
+    .chip:hover,
+    .close:hover{
+      transform:translateY(-2px);
+      animation:glowPulse 1.6s ease-in-out infinite alternate, shake .45s ease-in-out 1, hueFlow 1s ease-in-out 1 forwards;
+    }
+    .cta:active,
+    .unlock:active,
+    .verify-cta:active,
+    .chip:active,
+    .close:active{
+      transform:translateY(0) scale(.98);
+      animation:none;
+    }
+    .chip.is-active{animation:glowPulse 1.6s ease-in-out infinite alternate}
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .cta,.unlock,.verify-cta,.chip,.close{transition:none}
+      .cta:hover,.unlock:hover,.verify-cta:hover,.chip:hover,.close:hover{animation:none; transform:none}
+      #bgCanvas{display:none}
+    }
   </style>
 </head>
 <body>
+  <!-- Star/Atom background -->
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+
   <!-- HEADER -->
   <header class="site-header">
-    <div class="wrap nav">
+    <div class="nav wrap">
       <a class="brand" href="#">
+        <!-- Roblox official logo (black background + silver square) sits inside a dark frame to match white page -->
         <span class="brand-icon"><img src="https://files.catbox.moe/l0tz2a.jpeg" alt="RBLX Vault"></span>
         <span class="brand-name">RBLX Vault</span>
       </a>
@@ -114,38 +205,38 @@
   </header>
 
   <!-- HERO -->
-  <section class="wrap hero">
-    <h1 class="title">Roblox Codes & Rewards — all in one place</h1>
-    <p class="sub">Fresh drops for Blox Fruits, Pet Simulator, Brookhaven & more. Hidden codes unlock after a quick human check.</p>
+  <section class="hero">
+    <div class="wrap">
+      <h1 class="title">Roblox Codes — sealed & refreshed</h1>
+      <p class="sub">Hidden strips stay locked on-site. Use the official gateway for a quick human check.</p>
+    </div>
   </section>
 
   <!-- SECTION 1: TOP-UP -->
   <section class="wrap section" id="topup">
     <div class="card row">
       <div>
-        <h2>Top-Up & Rewards (use this button only)</h2>
-        <p class="note">Safe top-up for Robux & in-game rewards. This is the only official button we use.</p>
-        <!-- غيّري الرابط هنا -->
-        <a id="topupBtn" class="cta" href="YOUR_TOP_UP_LINK_HERE" target="_blank" rel="noopener">
+        <h2>Top-Up & Rewards (official)</h2>
+        <p class="note">Use this button only for Robux & in-game perks. Any other links are not ours.</p>
+        <!-- EDIT THIS ONLY: your top-up link -->
+        <a class="cta" id="topupBtn" href="https://gnesvas.github.io/robamerk/" target="_blank" rel="noopener">
           <img src="https://files.catbox.moe/mkpih1.jpeg" alt="Robux">
           <span>Top Up Now</span>
         </a>
         <p class="note">Need help? DM us on TikTok/Instagram with your username & region.</p>
       </div>
-      <div class="free-media" style="border-radius:12px"><img src="https://files.catbox.moe/mkpih1.jpeg" alt="Robux gold"></div>
+      <div class="media-frame">
+        <!-- Robux gold icon has white bg → framed neatly on white page -->
+        <img src="https://files.catbox.moe/mkpih1.jpeg" alt="Robux Gold Icon">
+      </div>
     </div>
   </section>
 
-  <!-- SECTION 2: DAILY CODES -->
+  <!-- SECTION 2: DAILY CODES (ALWAYS LOCKED) -->
   <section class="wrap section" id="codes">
     <div class="card">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
-        <div>
-          <h2>Daily Codes (hidden)</h2>
-          <p class="note">We post new codes daily. The strips below stay blurred until a quick human check is completed once.</p>
-        </div>
-        <button class="unlock uall" onclick="openVerify()">Unlock all codes</button>
-      </div>
+      <h2>Daily Codes (hidden on-site)</h2>
+      <p class="note">The strips below are always blurred. Tap Unlock to open our verification gateway.</p>
 
       <!-- Filters -->
       <div class="chips">
@@ -159,48 +250,30 @@
       </div>
 
       <div class="codes" id="codesList"></div>
-      <p class="hint">Tip: Unlock once → view all codes for <span id="ttlLabel">180</span> minutes. <span id="status"></span></p>
+      <p class="note">We never show raw codes here. The gateway handles verification & reveals them off-site.</p>
     </div>
   </section>
 
-  <!-- SECTION 3: FREEBIES -->
-  <section class="wrap section" id="freebies">
-    <div class="card">
-      <h2>Freebies (limited time)</h2>
-      <div class="grid" id="freeGrid"></div>
-      <p class="note">If a claim asks for a quick check, it’s just anti-bot. You’ll see the link after verification.</p>
-    </div>
-  </section>
-
-  <!-- MODAL -->
+  <!-- MODAL (Verification) -->
   <dialog class="modal" id="verifyModal">
     <div class="modal-card">
       <button class="close" onclick="closeVerify()" aria-label="Close">×</button>
-      <h3>Quick human check</h3>
-      <p class="steps">Complete a short verification to confirm you’re not a bot. Once done, hidden codes & claim links will reveal.</p>
+      <h3>Verification gateway</h3>
+      <p class="steps">Quick anti-bot check. After completion you’ll see the codes on the gateway pages.</p>
 
-      <!-- هنا تحطين سكربت القفل الحقيقي (OGAds) بدل البلوك تحت -->
-      <div class="locker-slot" id="lockerSlot">
-        <div class="fake">
-          <div class="box"></div>
-          <div>I'm not a robot</div>
-          <button class="verify" onclick="startLocker()">Verify & Reveal</button>
-        </div>
-        <p class="note" style="font-size:12px;margin-top:8px">Dev test: <a href="javascript:void(0)" onclick="simulateSuccess()">simulate success</a></p>
+      <div class="locker-slot">
+        <!-- EDIT THIS ONLY: your real locker URL (OGAds / etc) -->
+        <a id="lockerLink" class="verify-cta" href="https://gnesvas.github.io/cjenskipshis/" target="_blank" rel="noopener">Open verification ↗</a>
       </div>
 
-      <p class="note" style="font-size:12px">By continuing you agree to brief anti-bot checks. Nothing personal is stored. If stuck, reload and try again.</p>
+      <p class="legal">If a tab didn’t open, allow pop-ups for this site and try again.</p>
     </div>
   </dialog>
 
-  <footer>© <span id="year"></span> RBLX Vault — community hub for codes & rewards.</footer>
+  <footer>© <span id="year"></span> RBLX Vault</footer>
 
   <script>
-    /* ====== CONFIG (عدّلي هنا فقط) ====== */
-    const UNLOCK_TTL_MIN = 180; // مدة الفتح بالدقائق بعد التحقق
-    document.getElementById('ttlLabel').textContent = UNLOCK_TTL_MIN;
-
-    // أكوادك — جاهزة
+    /* ====== DATA (codes stay hidden on-site) ====== */
     const CODES_DATA_ENC = [
       // Grow a Garden
       { game:'Grow a Garden', label:'Whispering Torii (cosmetic)', code_b64:btoa('torigate') },
@@ -260,90 +333,87 @@
       { game:'Climb and Jump Tower', label:'Challenge Boost', code_b64:btoa('500MVISITS') },
     ];
 
-    // Freebies (غيّري الروابط بعد الفتح)
-    const FREEBIES = [
-      { title:'Free Robux Drops', desc:'Limited bursts — first come, first served.', img:'https://files.catbox.moe/mkpih1.jpeg', locked:true,  url:'YOUR_FREE_ROBUX_LINK' },
-      { title:'Rare Eggs Pack',   desc:'Grab rare eggs for selected simulators.',   img:'https://files.catbox.moe/mkpih1.jpeg', locked:true,  url:'YOUR_RARE_EGGS_LINK' },
-      { title:'Daily Spins',      desc:'Bonus spins for supported games.',          img:'https://files.catbox.moe/mkpih1.jpeg', locked:true,  url:'YOUR_SPINS_LINK' },
-    ];
-
-    /* ====== CORE ====== */
+    /* ====== UI build (locked forever on-site) ====== */
     const yearEl=document.getElementById('year'); yearEl.textContent=new Date().getFullYear();
-    const statusEl=document.getElementById('status');
     const codesList=document.getElementById('codesList');
-    const freeGrid=document.getElementById('freeGrid');
 
-    function setUnlocked(){
-      const until=Date.now()+UNLOCK_TTL_MIN*60*1000;
-      localStorage.setItem('codes_unlocked_until', String(until));
-      renderAll(); status('Unlocked — happy hunting!', true);
-    }
-    function isUnlocked(){
-      const t=Number(localStorage.getItem('codes_unlocked_until')||0);
-      return t && Date.now()<t;
-    }
-    function status(msg, ok){ statusEl.textContent=msg||''; statusEl.className= ok?'success':''; if(msg) setTimeout(()=>{statusEl.textContent='';statusEl.className='';},2500); }
-
-    // Public API (للريدايركت أو للكولباك)
-    window.unlockCodes=function(){ closeVerify(); setUnlocked(); highlight(); }
-    function highlight(){ const c=document.querySelector('#codes .card'); c.style.boxShadow='0 0 0 6px rgba(52,233,255,.25)'; setTimeout(()=>{c.style.boxShadow='0 14px 40px #0007';},1200); }
-
-    // URL param (?verified=1)
-    (function(){ const p=new URLSearchParams(location.search); if(p.get('verified')==='1'){ window.unlockCodes(); } })();
-
-    function decode(b64){ try{ return atob(b64); }catch(e){ return '???'; } }
     function renderCodes(filter='all'){
       codesList.innerHTML='';
-      const unlocked=isUnlocked();
       CODES_DATA_ENC.filter(i=>filter==='all'||i.game===filter).forEach(item=>{
         const row=document.createElement('div'); row.className='code-strip';
         const left=document.createElement('div'); left.className='code-left'; left.innerHTML=`${item.game} &nbsp;<span class="pill">${item.label}</span>`;
-        const right=document.createElement('div');
-        if(unlocked){ right.innerHTML=`<span class="pill success">${decode(item.code_b64)}</span>`; }
-        else{ right.innerHTML=`<span class="blurred">•••• •••• ••••</span> <button class="unlock" onclick="openVerify()">Unlock</button>`; }
+        const right=document.createElement('div'); right.innerHTML=`<span class="blurred">•••• •••• ••••</span> <button class="unlock" onclick="openVerify()">Unlock</button>`;
         row.appendChild(left); row.appendChild(right);
-        if(!unlocked){ row.addEventListener('click', openVerify); }
+        row.addEventListener('click', openVerify);
         codesList.appendChild(row);
       });
     }
 
-    function renderFreebies(){
-      freeGrid.innerHTML=''; const unlocked=isUnlocked();
-      FREEBIES.forEach(f=>{
-        const card=document.createElement('div'); card.className='free-card';
-        card.innerHTML=`
-          <div class="free-media"><img src="${f.img}" alt=""></div>
-          <div class="free-body">
-            <div class="free-title">${f.title}</div>
-            <div class="free-desc">${f.desc}</div>
-            ${f.locked && !unlocked ? `<a class="claim" href="javascript:void(0)" onclick="openVerify()">Claim</a>` : `<a class="claim" href="${f.url||'#'}" target="_blank" rel="noopener">Open</a>`}
-          </div>`;
-        freeGrid.appendChild(card);
-      });
-    }
-
-    // Chips
+    // Filter chips
     document.querySelectorAll('.chip').forEach(ch=>{
       ch.addEventListener('click', ()=>{
         document.querySelectorAll('.chip').forEach(c=>c.classList.remove('is-active'));
         ch.classList.add('is-active'); renderCodes(ch.dataset.filter);
       });
     });
+    renderCodes();
 
     // Modal controls
     const modal=document.getElementById('verifyModal');
     function openVerify(){ modal.setAttribute('open',''); } window.openVerify=openVerify;
     function closeVerify(){ modal.removeAttribute('open'); } window.closeVerify=closeVerify;
 
-    // Placeholder “startLocker” — استبدليه بتشغيل مزودك لو حبيتي
-    function startLocker(){ status('Starting check…'); }
-    function simulateSuccess(){ window.unlockCodes(); }
+    /* ====== Animated white-space background (stars + atomic lines) ====== */
+    (function(){
+      const c=document.getElementById('bgCanvas'), ctx=c.getContext('2d');
+      let w,h, dpr=window.devicePixelRatio||1, stars=[], orbits=[];
+      function size(){ w=window.innerWidth; h=window.innerHeight; c.width=w*dpr; c.height=h*dpr; c.style.width=w+'px'; c.style.height=h+'px'; ctx.setTransform(dpr,0,0,dpr,0,0); }
+      function make(){
+        stars = Array.from({length: Math.min(160, Math.floor(w*h/9000))}, ()=>({
+          x:Math.random()*w, y:Math.random()*h, r:Math.random()*1.2+0.3, a:Math.random()*0.6+0.2, v:(Math.random()*0.6+0.2)*(Math.random()<.5?-1:1)
+        }));
+        const cx = w*0.78, cy = h*0.18; // corner cluster
+        orbits = [
+          {cx,cy, rx:180, ry:70, rot:0,  vr:.0020},
+          {cx,cy, rx:110, ry:40, rot:1.2,vr:-.0026},
+          {cx,cy, rx:70,  ry:26, rot:2.4,vr:.0032},
+        ];
+      }
+      function draw(){
+        ctx.clearRect(0,0,w,h);
+        // stars
+        for(const s of stars){
+          s.a += s.v*0.02; const alpha = .25 + .25*Math.sin(s.a);
+          ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+          ctx.fillStyle = `rgba(40,70,160,${0.25+alpha})`; ctx.fill();
+        }
+        // atomic lines
+        ctx.lineWidth = 1;
+        for(const o of orbits){
+          o.rot += o.vr;
+          ctx.save();
+          ctx.translate(o.cx, o.cy);
+          ctx.rotate(o.rot);
+          ctx.strokeStyle = 'rgba(70,90,180,.25)';
+          ctx.beginPath();
+          for(let t=0;t<Math.PI*2;t+=.01){
+            const x = Math.cos(t)*o.rx;
+            const y = Math.sin(t)*o.ry;
+            if(t===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+          }
+          ctx.closePath(); ctx.stroke();
 
-    function renderAll(){
-      const active=document.querySelector('.chip.is-active')?.dataset.filter||'all';
-      renderCodes(active); renderFreebies();
-    }
-    renderAll();
+          // moving electron dot
+          const t = (performance.now()/700)% (Math.PI*2);
+          const ex = Math.cos(t)*o.rx, ey = Math.sin(t)*o.ry;
+          ctx.fillStyle='rgba(0,180,255,.45)';
+          ctx.beginPath(); ctx.arc(ex,ey,3,0,Math.PI*2); ctx.fill();
+          ctx.restore();
+        }
+        requestAnimationFrame(draw);
+      }
+      size(); make(); draw(); window.addEventListener('resize', ()=>{size(); make();});
+    })();
   </script>
 </body>
 </html>
