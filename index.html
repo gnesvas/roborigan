@@ -1,419 +1,90 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ar">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>RBLXoz Codes & Top-Up</title>
-  <meta name="description" content="Roblox codes — sealed on-site. Use our verification gateway to access updates." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>كودك الخاص</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      /* Lux palette on white space background */
-      --paper:#ffffff;            /* base white */
-      --ink:#0b1020;              /* primary text (deep navy) */
-      --muted:#5d6b88;            /* secondary text */
-      --line:#e6ecf5;             /* borders */
-      --panel:#ffffff;            /* cards */
-      --shadow:0 10px 30px rgba(10,20,50,.08), 0 2px 10px rgba(10,20,50,.05);
+<!-- خلفية الذرات -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<style>
+  :root{
+    --accent:#7b2cff; --accent-dark:#5a1fd1;
+    --radius:20px;
+    --card-w:460px;
+  }
+  body{margin:0;font-family:Inter,sans-serif;display:grid;place-items:center;min-height:100vh;direction:rtl}
+  #particles-js{position:fixed;inset:0;z-index:-1;background:#0d0017;} 
 
-      /* Brand accents (refined) */
-      --violet:#6a5cff;           /* royal violet */
-      --cyan:#00d1ff;             /* electric cyan */
-      --gold:#ffbf2f;             /* robux gold */
-      --chip:#edf3ff;             /* soft pill bg */
-      --chip-bd:#c8d6ff;          /* soft pill border */
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif; color:var(--ink);
-      background: radial-gradient(1400px 900px at 10% -10%, #f2f6ff 0%, transparent 60%),
-                  radial-gradient(1200px 800px at 120% -10%, #eef3ff 0%, transparent 60%),
-                  var(--paper);
-      overflow-x:hidden;
-    }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:1060px; margin:auto; padding:16px}
+  .card{
+    width:min(var(--card-w),92vw); background:#fff; border-radius:20px;
+    border:3px solid var(--accent); box-shadow:0 14px 30px rgba(123,44,255,.25);
+    padding:40px 24px 50px; text-align:center; position:relative;
+    animation: fadeIn 1s ease;
+  }
+  .brand-bar{
+    position:absolute; left:50%; top:-30px; transform:translateX(-50%);
+    background:#fff; border:3px solid var(--accent); border-radius:16px; padding:8px 18px;
+    box-shadow:0 8px 20px rgba(123,44,255,.25);
+  }
+  .brand{height:34px}
 
-    /* ===== Background canvas (stars + atomic 3D lines) ===== */
-    #bgCanvas{position:fixed; inset:0; z-index:-1;}
-
-    /* ===== Header ===== */
-    .site-header{
-      position:sticky; top:0; z-index:20;
-      background:rgba(255,255,255,.7);
-      backdrop-filter:saturate(1.2) blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-    .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 16px}
-    .brand{display:flex; align-items:center; gap:12px}
-    .brand-icon{
-      width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
-      background:#0f1222;              /* dark frame to embrace Roblox black logo */
-      box-shadow:0 6px 16px rgba(0,0,0,.12), inset 0 0 0 1px #1d244a;
-    }
-    .brand-icon img{width:78%;height:78%;object-fit:contain}
-    .brand-name{font-weight:800;letter-spacing:.2px}
-    .badge{font-size:12px;border:1px solid var(--line);padding:6px 10px;border-radius:999px;background:#f8fbff;color:#2b3456}
-
-    /* ===== Hero ===== */
-    .hero{padding:24px 16px}
-    .title{font-size:30px;margin:6px 0 6px}
-    .sub{color:var(--muted);margin:0}
-
-    /* ===== Cards & layout ===== */
-    .section{padding:18px 16px}
-    .card{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:18px; box-shadow:var(--shadow)}
-    .row{display:grid; grid-template-columns:1fr; gap:16px}
-    @media(min-width:860px){ .row{grid-template-columns:1.1fr .9fr} }
-
-    /* ===== Top-up CTA ===== */
-    .cta{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:14px 18px; border-radius:14px; border:1px solid #ffe198;
-      background:linear-gradient(145deg,#ffe598,#ffbf2f);
-      color:#3b2a00; font-weight:900; box-shadow:0 10px 26px rgba(255,191,47,.25);
-      transition:transform .15s ease, filter .15s ease, box-shadow .25s ease, background-position .35s ease;
-      background-size:120% 120%;
-      will-change:transform,filter;
-    }
-    .cta img{
-      width:24px; height:24px; object-fit:contain;
-      background:#fff; border-radius:8px; padding:2px; box-shadow:inset 0 0 0 1px #eee;
-    }
-    .note{color:var(--muted); margin-top:8px; line-height:1.6}
-
-    /* ===== Codes ===== */
-    .chips{display:flex; gap:8px; flex-wrap:wrap; margin:8px 0 12px}
-    .chip{
-      padding:8px 12px; border-radius:999px; background:var(--chip); border:1px solid var(--chip-bd); color:#2b3456; cursor:pointer;
-      font-weight:600;
-      transition:transform .15s ease, filter .15s ease, box-shadow .25s ease, background-position .35s ease;
-      background-size:120% 120%;
-      will-change:transform,filter;
-    }
-    .chip.is-active{box-shadow:0 0 0 4px rgba(106,92,255,.18), inset 0 0 0 1px #b6a8ff}
-    .codes{display:grid; grid-template-columns:1fr; gap:10px}
-    .code-strip{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      padding:14px; border:1px solid var(--line); border-radius:12px; background:#fff; box-shadow:var(--shadow);
-    }
-    .code-left{font-weight:800}
-    .pill{padding:4px 8px;border:1px solid #d8e2ff;border-radius:999px;font-size:12px;color:#39446a;background:#f3f7ff}
-    .blurred{
-      filter:blur(6px); user-select:none; background:linear-gradient(90deg,#eef3ff 0%, #f7faff 100%);
-      padding:8px 10px; border-radius:8px; min-width:170px; text-align:center; color:#8aa0d6;
-    }
-    .unlock{
-      padding:10px 14px; border-radius:12px; border:1px solid #a8e8ff;
-      background:linear-gradient(145deg,var(--violet),var(--cyan)); color:#fff; font-weight:900; cursor:pointer;
-      box-shadow:0 10px 26px rgba(0,209,255,.2);
-      transition:transform .15s ease, filter .15s ease, box-shadow .25s ease, background-position .35s ease;
-      background-size:120% 120%;
-      will-change:transform,filter;
-    }
-
-    /* Robux gold icon on white: framed cleanly */
-    .media-frame{display:grid; place-items:center; height:128px; border-radius:16px; background:#fff; border:1px solid var(--line); box-shadow:var(--shadow)}
-    .media-frame img{width:92px; height:92px; object-fit:contain; background:#fff; border-radius:18px; padding:10px}
-
-    /* ===== Modal ===== */
-    dialog.modal{position:fixed; inset:0; display:none; place-items:center; background:rgba(10,16,34,.35); backdrop-filter:blur(10px); padding:20px; z-index:30}
-    dialog[open]{display:grid}
-    .modal-card{width:min(620px,100%); background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px; box-shadow:var(--shadow); position:relative}
-    .close{
-      position:absolute; right:16px; top:14px; border:0; background:#f3f6ff; color:#1f2a46; width:32px; height:32px; border-radius:8px; cursor:pointer; box-shadow:var(--shadow);
-      transition:transform .15s ease, filter .15s ease, box-shadow .25s ease;
-      will-change:transform,filter;
-    }
-    .modal h3{margin:2px 0 8px}
-    .steps{color:#485577; font-size:14px; line-height:1.8}
-    .locker-slot{margin:12px 0; border:1px dashed #cfd9f2; background:#fbfdff; border-radius:12px; padding:14px}
-    .verify-cta{
-      display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px; border:1px solid #a8e8ff;
-      background:linear-gradient(145deg,var(--violet),var(--cyan)); color:#fff; font-weight:900;
-      box-shadow:0 10px 28px rgba(106,92,255,.25);
-      transition:transform .15s ease, filter .15s ease, box-shadow .25s ease, background-position .35s ease;
-      background-size:120% 120%;
-      will-change:transform,filter;
-    }
-    .legal{color:#6a789b; font-size:12px; margin-top:6px}
-
-    footer{border-top:1px solid var(--line); color:#5e6a86; text-align:center; font-size:13px; padding:16px}
-
-    /* ===== Fancy animations for ALL buttons ===== */
-    @keyframes glowPulse{
-      from{ box-shadow:0 10px 22px rgba(0,209,255,.18), 0 0 0 0 rgba(0,209,255,0)}
-      to{   box-shadow:0 16px 36px rgba(0,209,255,.32), 0 0 0 6px rgba(0,209,255,.10)}
-    }
-    @keyframes hueFlow{
-      from{ filter:hue-rotate(0deg) saturate(1) brightness(1) }
-      to{   filter:hue-rotate(14deg) saturate(1.15) brightness(1.06) }
-    }
-    @keyframes shake{
-      0%,100%{ transform:translate3d(0,0,0) rotate(0) }
-      20%{ transform:translate3d(1px,-1px,0) rotate(-0.4deg) }
-      40%{ transform:translate3d(-1px,1px,0) rotate(0.4deg) }
-      60%{ transform:translate3d(1px,0,0) rotate(-0.3deg) }
-      80%{ transform:translate3d(-1px,-1px,0) rotate(0.3deg) }
-    }
-
-    /* Apply to ALL actionable buttons */
-    .cta:hover,
-    .unlock:hover,
-    .verify-cta:hover,
-    .chip:hover,
-    .close:hover{
-      transform:translateY(-2px);
-      animation:glowPulse 1.6s ease-in-out infinite alternate, shake .45s ease-in-out 1, hueFlow 1s ease-in-out 1 forwards;
-    }
-    .cta:active,
-    .unlock:active,
-    .verify-cta:active,
-    .chip:active,
-    .close:active{
-      transform:translateY(0) scale(.98);
-      animation:none;
-    }
-    .chip.is-active{animation:glowPulse 1.6s ease-in-out infinite alternate}
-
-    /* Respect reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      .cta,.unlock,.verify-cta,.chip,.close{transition:none}
-      .cta:hover,.unlock:hover,.verify-cta:hover,.chip:hover,.close:hover{animation:none; transform:none}
-      #bgCanvas{display:none}
-    }
-  </style>
+  h1{margin:36px 0 14px;font-size:26px;font-weight:900;color:#222}
+  .code-box{
+    font-size:34px;font-weight:900;letter-spacing:3px;
+    background:linear-gradient(90deg,var(--accent),var(--accent-dark));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    margin:20px 0 12px;
+    animation: popIn .7s ease;
+  }
+  .note{
+    font-size:14px; color:#c0392b;font-weight:700;margin-top:18px;
+  }
+  .loading{
+    font-size:18px; font-weight:700; color:#555; margin-top:14px;
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes popIn{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+</style>
 </head>
 <body>
-  <!-- Star/Atom background -->
-  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+<div id="particles-js"></div>
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="nav wrap">
-      <a class="brand" href="#">
-        <!-- Roblox official logo (black background + silver square) sits inside a dark frame to match white page -->
-        <span class="brand-icon"><img src="https://files.catbox.moe/l0tz2a.jpeg" alt="RBLX Vault"></span>
-        <span class="brand-name">RBLXoz </span>
-      </a>
-      <span class="badge">Updated daily</span>
-    </div>
-  </header>
+<section class="card">
+  <div class="brand-bar">
+    <img src="https://clipground.com/images/logo-apple-clipart-4.png" alt="logo" class="brand">
+  </div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="wrap">
-      <h1 class="title">Roblox Codes — sealed & refreshed</h1>
-      <p class="sub">.</p>
-    </div>
-  </section>
+  <h1>🎉 مبروك! 🎉</h1>
+  <p>الكود الخاص بك هو:</p>
+  <div class="code-box" id="code">...</div>
+  <div class="loading" id="loading">⏳ جاري توليد الكود...</div>
+  <div class="note" id="note" style="display:none;">⚠️ ملاحظة هامة: الكود يتغير كل ساعة ولا يمكن استخدامه إلا لشخص واحد فقط.</div>
+</section>
 
-  <!-- SECTION 1: TOP-UP -->
-  <section class="wrap section" id="topup">
-    <div class="card row">
-      <div>
-        <h2>Top-Up & Rewards</h2>
-        <p class="note">Use this button only for Robux & in-game perks. Any other links are not ours.</p>
-        <!-- EDIT THIS ONLY: your top-up link -->
-        <a class="cta" id="topupBtn" href="https://gnesvas.github.io/robamerk/" target="_blank" rel="noopener">
-          <img src="https://files.catbox.moe/mkpih1.jpeg" alt="Robux">
-          <span>Top Up Now</span>
-        </a>
-        <p class="note">Need help? DM us on TikTok/Instagram .</p>
-      </div>
-      <div class="media-frame">
-        <!-- Robux gold icon has white bg → framed neatly on white page -->
-        <img src="https://files.catbox.moe/mkpih1.jpeg" alt="Robux Gold Icon">
-      </div>
-    </div>
-  </section>
+<script>
+  // تهيئة الخلفية
+  particlesJS("particles-js",{
+    particles:{number:{value:70,density:{enable:true,value_area:800}},
+      color:{value:"#7b2cff"},shape:{type:"circle"},
+      opacity:{value:.6,random:true},size:{value:4,random:true},
+      line_linked:{enable:true,distance:150,color:"#7b2cff",opacity:.4,width:1},
+      move:{enable:true,speed:2,direction:"none",out_mode:"out"}},
+    interactivity:{detect_on:"canvas",
+      events:{onhover:{enable:true,mode:"grab"},onclick:{enable:true,mode:"push"}},
+      modes:{grab:{distance:140,line_linked:{opacity:.8}},push:{particles_nb:3}}},
+    retina_detect:true
+  });
 
-  <!-- SECTION 2: DAILY CODES (ALWAYS LOCKED) -->
-  <section class="wrap section" id="codes">
-    <div class="card">
-      <h2>Daily Codes </h2>
-      <p class="note">The strips below are always blurred. Tap Unlock to open our verification gateway.</p>
-
-      <!-- Filters -->
-      <div class="chips">
-        <button class="chip is-active" data-filter="all">All</button>
-        <button class="chip" data-filter="Grow a Garden">Grow a Garden</button>
-        <button class="chip" data-filter="NFL Universe Football">NFL Universe Football</button>
-        <button class="chip" data-filter="Blue Lock: Rivals">Blue Lock: Rivals</button>
-        <button class="chip" data-filter="Roblox Rivals">Roblox Rivals</button>
-        <button class="chip" data-filter="Sword League">Sword League</button>
-        <button class="chip" data-filter="Climb and Jump Tower">Climb and Jump Tower</button>
-      </div>
-
-      <div class="codes" id="codesList"></div>
-      <p class="note">.</p>
-    </div>
-  </section>
-
-  <!-- MODAL (Verification) -->
-  <dialog class="modal" id="verifyModal">
-    <div class="modal-card">
-      <button class="close" onclick="closeVerify()" aria-label="Close">×</button>
-      <h3>Verification gateway</h3>
-      <p class="steps">Quick anti-bot check. After completion you’ll see the codes on the gateway pages.</p>
-
-      <div class="locker-slot">
-        <!-- EDIT THIS ONLY: your real locker URL (OGAds / etc) -->
-        <a id="lockerLink" class="verify-cta" href="https://gnesvas.github.io/cjenskipshis/" target="_blank" rel="noopener">Open verification ↗</a>
-      </div>
-
-      <p class="legal">If a tab didn’t open, allow pop-ups for this site and try again.</p>
-    </div>
-  </dialog>
-
-  <footer>© <span id="year"></span> RBLXoz</footer>
-
-  <script>
-    /* ====== DATA (codes stay hidden on-site) ====== */
-    const CODES_DATA_ENC = [
-      // Grow a Garden
-      { game:'Grow a Garden', label:'Whispering Torii (cosmetic)', code_b64:btoa('torigate') },
-
-      // NFL Universe Football
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('NFLHYPE') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('2XWEEKEND') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('AUGUST25') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('SUBSCRIPTIONS') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('SEASON17') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('ONEHAND') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('SKILLBASED') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('JULY4TH2025') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('HAPPY4TH') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('SEASON16') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('SEASON15') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('SEASON14') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('SEASON13') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('SEASON8') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('LOOT') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('SPACE') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('ENDZONE') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('MUTATIONS') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('ITEMS') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('BIRTHDAY2025') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('NFLITEMS') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('CREWS') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('PROBOWL2025') },
-      { game:'NFL Universe Football', label:'Active code', code_b64:btoa('FLYEAGLESFLY') },
-
-      // Blue Lock: Rivals
-      { game:'Blue Lock: Rivals', label:'Lucky Style Spins', code_b64:btoa('YUKIGLASSES') },
-      { game:'Blue Lock: Rivals', label:'Flow Spins',        code_b64:btoa('YUKIEVENTGOALS') },
-
-      // Roblox Rivals
-      { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64:btoa('COMMUNITY16') },
-      { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64:btoa('COMMUNITY15') },
-      { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64:btoa('COMMUNITY14') },
-      { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64:btoa('COMMUNITY13') },
-      { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64:btoa('COMMUNITY12') },
-      { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64:btoa('COMMUNITY11') },
-      { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64:btoa('COMMUNITY10') },
-      { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64:btoa('COMMUNITY9') },
-      { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64:btoa('COMMUNITY8') },
-      { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64:btoa('COMMUNITY7') },
-      { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64:btoa('COMMUNITY6') },
-      { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64:btoa('COMMUNITY5') },
-      { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64:btoa('100MVisits') },
-      { game:'Roblox Rivals', label:'Wraps/Charms/Keys', code_b64:btoa('BONUS') },
-
-      // Sword League
-      { game:'Sword League', label:'10 Cheese', code_b64:btoa('freefood') },
-
-      // Climb and Jump Tower
-      { game:'Climb and Jump Tower', label:'Challenge Boost', code_b64:btoa('ALIEN') },
-      { game:'Climb and Jump Tower', label:'Challenge Boost', code_b64:btoa('SPACE') },
-      { game:'Climb and Jump Tower', label:'Challenge Boost', code_b64:btoa('500MVISITS') },
-    ];
-
-    /* ====== UI build (locked forever on-site) ====== */
-    const yearEl=document.getElementById('year'); yearEl.textContent=new Date().getFullYear();
-    const codesList=document.getElementById('codesList');
-
-    function renderCodes(filter='all'){
-      codesList.innerHTML='';
-      CODES_DATA_ENC.filter(i=>filter==='all'||i.game===filter).forEach(item=>{
-        const row=document.createElement('div'); row.className='code-strip';
-        const left=document.createElement('div'); left.className='code-left'; left.innerHTML=`${item.game} &nbsp;<span class="pill">${item.label}</span>`;
-        const right=document.createElement('div'); right.innerHTML=`<span class="blurred">•••• •••• ••••</span> <button class="unlock" onclick="openVerify()">Unlock</button>`;
-        row.appendChild(left); row.appendChild(right);
-        row.addEventListener('click', openVerify);
-        codesList.appendChild(row);
-      });
-    }
-
-    // Filter chips
-    document.querySelectorAll('.chip').forEach(ch=>{
-      ch.addEventListener('click', ()=>{
-        document.querySelectorAll('.chip').forEach(c=>c.classList.remove('is-active'));
-        ch.classList.add('is-active'); renderCodes(ch.dataset.filter);
-      });
-    });
-    renderCodes();
-
-    // Modal controls
-    const modal=document.getElementById('verifyModal');
-    function openVerify(){ modal.setAttribute('open',''); } window.openVerify=openVerify;
-    function closeVerify(){ modal.removeAttribute('open'); } window.closeVerify=closeVerify;
-
-    /* ====== Animated white-space background (stars + atomic lines) ====== */
-    (function(){
-      const c=document.getElementById('bgCanvas'), ctx=c.getContext('2d');
-      let w,h, dpr=window.devicePixelRatio||1, stars=[], orbits=[];
-      function size(){ w=window.innerWidth; h=window.innerHeight; c.width=w*dpr; c.height=h*dpr; c.style.width=w+'px'; c.style.height=h+'px'; ctx.setTransform(dpr,0,0,dpr,0,0); }
-      function make(){
-        stars = Array.from({length: Math.min(160, Math.floor(w*h/9000))}, ()=>({
-          x:Math.random()*w, y:Math.random()*h, r:Math.random()*1.2+0.3, a:Math.random()*0.6+0.2, v:(Math.random()*0.6+0.2)*(Math.random()<.5?-1:1)
-        }));
-        const cx = w*0.78, cy = h*0.18; // corner cluster
-        orbits = [
-          {cx,cy, rx:180, ry:70, rot:0,  vr:.0020},
-          {cx,cy, rx:110, ry:40, rot:1.2,vr:-.0026},
-          {cx,cy, rx:70,  ry:26, rot:2.4,vr:.0032},
-        ];
-      }
-      function draw(){
-        ctx.clearRect(0,0,w,h);
-        // stars
-        for(const s of stars){
-          s.a += s.v*0.02; const alpha = .25 + .25*Math.sin(s.a);
-          ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-          ctx.fillStyle = `rgba(40,70,160,${0.25+alpha})`; ctx.fill();
-        }
-        // atomic lines
-        ctx.lineWidth = 1;
-        for(const o of orbits){
-          o.rot += o.vr;
-          ctx.save();
-          ctx.translate(o.cx, o.cy);
-          ctx.rotate(o.rot);
-          ctx.strokeStyle = 'rgba(70,90,180,.25)';
-          ctx.beginPath();
-          for(let t=0;t<Math.PI*2;t+=.01){
-            const x = Math.cos(t)*o.rx;
-            const y = Math.sin(t)*o.ry;
-            if(t===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-          }
-          ctx.closePath(); ctx.stroke();
-
-          // moving electron dot
-          const t = (performance.now()/700)% (Math.PI*2);
-          const ex = Math.cos(t)*o.rx, ey = Math.sin(t)*o.ry;
-          ctx.fillStyle='rgba(0,180,255,.45)';
-          ctx.beginPath(); ctx.arc(ex,ey,3,0,Math.PI*2); ctx.fill();
-          ctx.restore();
-        }
-        requestAnimationFrame(draw);
-      }
-      size(); make(); draw(); window.addEventListener('resize', ()=>{size(); make();});
-    })();
-  </script>
+  // "توليد" الكود (ثابت دائماً) بعد 10 ثواني
+  window.addEventListener("DOMContentLoaded",()=>{
+    setTimeout(()=>{
+      document.getElementById("code").textContent = "380271545";
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("note").style.display = "block";
+    },10000); // 10 ثواني
+  });
+</script>
 </body>
 </html>
