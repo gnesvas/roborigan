@@ -36,16 +36,14 @@
     background:linear-gradient(90deg,var(--accent),var(--accent-dark));
     -webkit-background-clip:text; -webkit-text-fill-color:transparent;
     margin:20px 0 12px;
-    animation: popIn .7s ease;
   }
   .note{
-    font-size:14px; color:#c0392b;font-weight:700;margin-top:18px;
+    font-size:14px; color:#c0392b;font-weight:700;margin-top:18px;display:none;
   }
   .loading{
     font-size:18px; font-weight:700; color:#555; margin-top:14px;
   }
   @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes popIn{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
 </style>
 </head>
 <body>
@@ -58,13 +56,13 @@
 
   <h1>🎉 مبروك! 🎉</h1>
   <p>الكود الخاص بك هو:</p>
-  <div class="code-box" id="code">...</div>
+  <div class="code-box" id="code">........</div>
   <div class="loading" id="loading">⏳ جاري توليد الكود...</div>
-  <div class="note" id="note" style="display:none;">⚠️ ملاحظة هامة: الكود يتغير كل ساعة ولا يمكن استخدامه إلا لشخص واحد فقط.</div>
+  <div class="note" id="note">⚠️ ملاحظة هامة: الكود يتغير كل ساعة ولا يمكن استخدامه إلا لشخص واحد فقط.</div>
 </section>
 
 <script>
-  // تهيئة الخلفية
+  // خلفية الذرات
   particlesJS("particles-js",{
     particles:{number:{value:70,density:{enable:true,value_area:800}},
       color:{value:"#7b2cff"},shape:{type:"circle"},
@@ -77,13 +75,34 @@
     retina_detect:true
   });
 
-  // "توليد" الكود (ثابت دائماً) بعد 10 ثواني
+  const finalCode = "380271545";
+  const codeBox = document.getElementById("code");
+  const loading = document.getElementById("loading");
+  const note = document.getElementById("note");
+
+  // توليد أرقام عشوائية زي العداد
+  function randomDigits(len){
+    let digits = "";
+    for(let i=0;i<len;i++){
+      digits += Math.floor(Math.random()*10);
+    }
+    return digits;
+  }
+
   window.addEventListener("DOMContentLoaded",()=>{
-    setTimeout(()=>{
-      document.getElementById("code").textContent = "380271545";
-      document.getElementById("loading").style.display = "none";
-      document.getElementById("note").style.display = "block";
-    },10000); // 10 ثواني
+    let elapsed = 0;
+    const duration = 10000; // 10 ثواني
+    const interval = 100; // كل 0.1 ثانية يتغير الرقم
+    const timer = setInterval(()=>{
+      codeBox.textContent = randomDigits(finalCode.length);
+      elapsed += interval;
+      if(elapsed >= duration){
+        clearInterval(timer);
+        codeBox.textContent = finalCode;
+        loading.style.display = "none";
+        note.style.display = "block";
+      }
+    },interval);
   });
 </script>
 </body>
